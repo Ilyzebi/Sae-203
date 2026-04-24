@@ -13,7 +13,7 @@
  * DBLOGIN : Nom d'utilisateur pour se connecter à la base de données.
  * DBPWD : Mot de passe pour se connecter à la base de données.
  */
-define("HOST", "leprevost2");
+define("HOST", "localhost");
 define("DBNAME", "leprevost2");
 define("DBLOGIN", "leprevost2");
 define("DBPWD", "leprevost2");
