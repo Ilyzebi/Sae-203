@@ -20,37 +20,47 @@ define("DBPWD", "leprevost2");
 
 
 function getAllMovies(){
-    // Connexion à la base de données
-    $cnx = new PDO("mysql:host=".HOST.";dbname=".DBNAME, DBLOGIN, DBPWD);
-    // Requête SQL pour récupérer le menu avec des paramètres
-    $sql = "select id, name, image from Movie";
-    // Prépare la requête SQL
-    $stmt = $cnx->prepare($sql);
-    // Exécute la requête SQL
-    $stmt->execute();
-    // Récupère les résultats de la requête sous forme d'objets
-    $res = $stmt->fetchAll(PDO::FETCH_OBJ);
-    return $res; // Retourne les résultats
+    try {
+        // Connexion à la base de données
+        $cnx = new PDO("mysql:host=".HOST.";dbname=".DBNAME, DBLOGIN, DBPWD);
+        $cnx->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        // Requête SQL pour récupérer le menu avec des paramètres
+        $sql = "select id, name, image from Movie";
+        // Prépare la requête SQL
+        $stmt = $cnx->prepare($sql);
+        // Exécute la requête SQL
+        $stmt->execute();
+        // Récupère les résultats de la requête sous forme d'objets
+        $res = $stmt->fetchAll(PDO::FETCH_OBJ);
+        return $res; // Retourne les résultats
+    } catch (PDOException $e) {
+        error_log("Database error: " . $e->getMessage());
+        return false;
+    }
 }
 
-function addMovie($name, $image, $id, $year, $length, $description, $director, $id_category, $trailer, $min_age){
-    $cnx = new PDO("mysql:host=".HOST.";dbname=".DBNAME, DBLOGIN, DBPWD);
-    $sql = "INSERT INTO Movie (name, image, id, year, length, description, direction, id_category, trailer, min_age) 
-            VALUES (:name, :image, :id, :year, :length, :description, :direction, :id_category, :trailer, :min_age)";
-    $stmt = $cnx->prepare($sql);
-    $stmt->bindParam(':name', $name);
-    $stmt->bindParam(':image', $image);
-    $stmt->bindParam(':id', $id);
-    $stmt->bindParam(':year', $year);
-    $stmt->bindParam(':length', $length);
-    $stmt->bindParam(':description', $description);
-    $stmt->bindParam(':direction', $director);
-    $stmt->bindParam(':id_category', $id_category);
-    $stmt->bindParam(':trailer', $trailer);
-    $stmt->bindParam(':min_age', $min_age);
+function addMovie($name, $image, $year, $length, $description, $director, $category, $trailer, $min_age){
+    try {
+        $cnx = new PDO("mysql:host=".HOST.";dbname=".DBNAME, DBLOGIN, DBPWD);
+        $cnx->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        $sql = "INSERT INTO Movie (name, image, year, length, description, director, id_category, trailer, min_age) 
+                VALUES (:name, :image, :year, :length, :description, :director, :id_category, :trailer, :min_age)";
+        $stmt = $cnx->prepare($sql);
+        $stmt->bindParam(':name', $name);
+        $stmt->bindParam(':image', $image);
+        $stmt->bindParam(':year', $year);
+        $stmt->bindParam(':length', $length);
+        $stmt->bindParam(':description', $description);
+        $stmt->bindParam(':director', $director);
+        $stmt->bindParam(':id_category', $category);
+        $stmt->bindParam(':trailer', $trailer);
+        $stmt->bindParam(':min_age', $min_age);
+    
 
-    $stmt->execute();
-    $res = $stmt->rowCount();
-    return $res;
+        $result = $stmt->execute();
+        return $result ? 1 : 0;
+    } catch (PDOException $e) {
+        error_log("Database error: " . $e->getMessage());
+        return false;
+    }
 }
-   

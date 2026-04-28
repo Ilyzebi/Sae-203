@@ -27,24 +27,17 @@ function readMoviesController(){
 }
 
 function addMovieController(){
-    // Vérifier que tous les paramètres requis sont présents
-    $required = ['name', 'image', 'year', 'length', 'description', 'director', 'category', 'trailer', 'min_age'];
-    foreach ($required as $field) {
-        if (!isset($_POST[$field])) {
-            return false;
-        }
-    }
-    
     $name = $_POST['name'];
     $image = $_POST['image'];
+    $id = $_POST['id'];
     $year = $_POST['year'];
     $length = $_POST['length'];
     $description = $_POST['description'];
     $director = $_POST['director'];
-    $category = $_POST['category'];
+    $id_category = $_POST['id_category'];
     $trailer = $_POST['trailer'];
     $min_age = $_POST['min_age'];
-    $result = addMovie($name, $image, $year, $length, $description, $director, $category, $trailer, $min_age);
+    $result = addMovie($name, $image, $id, $year, $length, $description, $director, $id_category, $trailer, $min_age);
     
     if ($result!=0) {
         return "Movie added successfully.";
