@@ -25,3 +25,23 @@ function readMoviesController(){
     $movies = getAllMovies();
     return $movies;
 }
+
+function addMovieController(){
+    $name = $_POST['name'];
+    $image = $_POST['image'];
+    $id = $_POST['id'];
+    $year = $_POST['year'];
+    $length = $_POST['length'];
+    $description = $_POST['description'];
+    $director = $_POST['director'];
+    $id_category = $_POST['id_category'];
+    $trailer = $_POST['trailer'];
+    $min_age = $_POST['min_age'];
+    $result = addMovie($name, $image, $id, $year, $length, $description, $director, $id_category, $trailer, $min_age);
+    
+    if ($result!=0) {
+        return "Movie added successfully.";
+    } else {
+        return "Failed to add movie.";
+    }
+}
