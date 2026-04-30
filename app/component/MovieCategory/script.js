@@ -9,7 +9,7 @@ MovieCategory.format = function (categoryData, imageBaseUrl = './server/images/'
     let html = template;
     html = html.replace('{{categoryName}}', categoryData.category);
     
-    let moviesHtml = MovieCard.formatMany(categoryData.movies, imageBaseUrl);
+    let moviesHtml = Movie.format(categoryData.movies);
 
     html = html.replace('{{movies}}', moviesHtml);
     return html;

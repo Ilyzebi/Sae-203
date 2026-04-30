@@ -1,101 +1,110 @@
 <!DOCTYPE html>
 <html lang="fr">
-  <head>
-    <title>SAE2.03 APP</title>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="./css/base.css" />
 
-  </head>
+<head>
+  <title>SAE2.03 APP</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="./css/base.css" />
 
-  <body>
-    <header id="header"></header>
+</head>
 
-    <section id="content">
-    </section>
+<body>
+  <header id="header"></header>
 
-    <script type="module">
-      import { NavBar } from "./component/NavBar/script.js";
-      import { Movie } from "./component/Movie/script.js";
-      import { MovieDetails } from "./component/MovieDetails/script.js";
-      import { DataMovie } from "./data/dataMovie.js";
-      import { MovieCategory } from "./component/MovieCategory/script.js";
+  <section id="content">
+  </section>
 
-      // Controleur
-      // Rappel, écrire window.C plutôt que let C est nécessaire pour tester depuis la console du navigateur
-      // Une fois l'application terminée, on pourrait remettre let C.
-      window.C = {};
+  <script type="module">
+    import { NavBar } from "./component/NavBar/script.js";
+    import { Movie } from "./component/Movie/script.js";
+    import { MovieDetails } from "./component/MovieDetails/script.js";
+    import { DataMovie } from "./data/dataMovie.js";
+    import { MovieCategory } from "./component/MovieCategory/script.js";
 
-      C.handlerAbout = function () {
-        alert(
-          "Ceci est une base de projet pour la SAE2.03 édition 2025. Bonne chance !"
-        );
-      };
+    // Controleur
+    // Rappel, écrire window.C plutôt que let C est nécessaire pour tester depuis la console du navigateur
+    // Une fois l'application terminée, on pourrait remettre let C.
+    window.C = {};
 
-      C.handlerHome = function () {
-        C.loadMovies();
-      };
+    C.handlerAbout = function () {
+      alert(
+        "Ceci est une base de projet pour la SAE2.03 édition 2025. Bonne chance !"
+      );
+    };
 
-      C.start = function () {
-        V.renderNavBar("C.handlerAbout()", "C.handlerHome()");
-      };
+    C.handlerHome = function () {
+      C.loadMoviesByCategory();
+    };
+
+    C.start = function () {
+      V.renderNavBar("C.handlerAbout()", "C.handlerHome()");
+    };
 
 
 
-      window.V = {};
+    window.V = {};
 
-      C.loadMovies = async function(){
-        let movies = await DataMovie.requestMovies();
-        V.renderMovies(movies);
+    C.loadMovies = async function () {
+      let movies = await DataMovie.requestMovies();
+      V.renderMovies(movies);
+    }
+
+    C.handleMovieClick = function (movieId) {
+      let movie = Movie.movies.find(m => m.id === movieId);
+      if (movie) {
+        V.renderMovieDetails(movie);
       }
+    }
 
-      C.handleMovieClick = function(movieId) {
-        let movie = Movie.movies.find(m => m.id === movieId);
-        if (movie) {
-          V.renderMovieDetails(movie);
-        }
+    C.loadMoviesByCategory = async function () {
+      let categories = await DataMovie.requestMoviesByCategory();
+      V.renderMovieCategory(categories);
+    }
+
+
+
+    C.backToMovies = function () {
+      C.loadMoviesByCategory();
+    }
+
+    /**
+     * V.renderNavBar
+     *
+     * Cette fonction est responsable de l'affichage de la barre de navigation (NavBar).
+     * Elle sélectionne l'élément HTML avec l'ID "header" et y insère le contenu
+     * formaté par le composant NavBar.
+     */
+    V.renderNavBar = function (hAbout, hHome) {
+      let header = document.querySelector("#header");
+      header.innerHTML = NavBar.format(hAbout, hHome);
+    };
+
+    V.renderMovies = function (movies) {
+      let content = document.querySelector("#content");
+      content.innerHTML = Movie.format(movies);
+    }
+
+    V.renderMovieDetails = function (movie) {
+      let content = document.querySelector("#content");
+      content.innerHTML = MovieDetails.format(movie);
+    }
+
+    V.renderMovieCategory = function (categories) {
+      let imageUrl = DataMovie.getHostUrl() + "server/images/";
+
+      if (categories.length === 0) {
+        document.querySelector("#content").innerHTML = '<div class="no-movies">Aucun film disponible pour le moment</div>';
+      } else {
+        let categoriesHTML = MovieCategory.formatMany(categories, imageUrl);
+        document.querySelector("#content").innerHTML = categoriesHTML;
       }
+    };
 
-      C.backToMovies = function() {
-        C.loadMovies();
-      }
+    C.start(); // Démarre l'application
+    C.loadMoviesByCategory();
+  </script>
+</body>
 
-      /**
-       * V.renderNavBar
-       *
-       * Cette fonction est responsable de l'affichage de la barre de navigation (NavBar).
-       * Elle sélectionne l'élément HTML avec l'ID "header" et y insère le contenu
-       * formaté par le composant NavBar.
-       */
-      V.renderNavBar = function (hAbout) {
-        let header = document.querySelector("#header");
-        header.innerHTML = NavBar.format(hAbout);
-      };
-
-      V.renderMovies = function (movies){
-        let content = document.querySelector("#content");
-        content.innerHTML = Movie.format(movies);
-      }
-
-      V.renderMovieDetails = function (movie){
-        let content = document.querySelector("#content");
-        content.innerHTML = MovieDetails.format(movie);
-      }
-
-      V.renderMovieCategory = function (categories){
-        let imageUrl = DataMovie.getHostUrl() + "server/images/";
-        
-        if (categories.length === 0) {
-          document.querySelector("#content").innerHTML = '<div class="no-movies">Aucun film disponible pour le moment</div>';
-        } else {
-          let categoriesHTML = MovieCategory.formatMany(categories, imageUrl);
-          document.querySelector("#content").innerHTML = categoriesHTML;
-        }
-      };
-      
-      C.start(); // Démarre l'application
-      C.loadMovies();
-    </script>
-  </body>
 </html>
 <script type="module"></script>

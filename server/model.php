@@ -78,3 +78,20 @@ function getAllCategories(){
     $res = $stmt->fetchAll(PDO::FETCH_OBJ);
     return $res; // Retourne les catégories
 }
+
+function getMoviesByCategory(){
+    try {
+        $cnx = new PDO("mysql:host=".HOST.";dbname=".DBNAME, DBLOGIN, DBPWD);
+        $cnx->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        $sql = "SELECT m.*, c.name as category_name
+                FROM Movie m
+                JOIN Category c ON m.id_category = c.id
+                ORDER BY c.name";
+        $stmt = $cnx->prepare($sql);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_OBJ);
+    } catch (PDOException $e) {
+        error_log("Database error: " . $e->getMessage());
+        return false;
+    }
+}
