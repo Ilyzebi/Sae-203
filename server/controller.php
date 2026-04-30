@@ -52,3 +52,9 @@ function addMovieController(){
         return "Failed to add movie.";
     }
 }
+
+function readCategoriesController(){
+    $categories = getAllCategories();
+    
+    return $categories;
+}

@@ -24,8 +24,8 @@ function getAllMovies(){
         // Connexion à la base de données
         $cnx = new PDO("mysql:host=".HOST.";dbname=".DBNAME, DBLOGIN, DBPWD);
         $cnx->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        // Requête SQL pour récupérer le menu avec des paramètres
-        $sql = "select id, name, image from Movie";
+        // Requête SQL pour récupérer tous les films avec tous les détails
+        $sql = "select id, name, image, description, director, year, id_category, trailer, min_age from Movie";
         // Prépare la requête SQL
         $stmt = $cnx->prepare($sql);
         // Exécute la requête SQL
@@ -63,4 +63,18 @@ function addMovie($name, $image, $year, $length, $description, $director, $categ
         error_log("Database error: " . $e->getMessage());
         return false;
     }
+}
+
+function getAllCategories(){
+    // Connexion à la base de données
+    $cnx = new PDO("mysql:host=".HOST.";dbname=".DBNAME, DBLOGIN, DBPWD);
+    // Requête SQL pour récupérer toutes les catégories
+    $sql = "SELECT id, name FROM Category ORDER BY name";
+    // Prépare la requête SQL
+    $stmt = $cnx->prepare($sql);
+    // Exécute la requête SQL
+    $stmt->execute();
+    // Récupère les résultats sous forme d'objets
+    $res = $stmt->fetchAll(PDO::FETCH_OBJ);
+    return $res; // Retourne les catégories
 }

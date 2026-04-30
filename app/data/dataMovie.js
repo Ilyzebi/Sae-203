@@ -19,3 +19,18 @@ DataMovie.requestMovies = async function(){
 
 export {DataMovie};
 
+
+DataMovie.requestMovieDetails = async function(){
+    try {
+        let answer = await fetch(HOST_URL + "/server/script.php?todo=readmoviedetails");
+        if (!answer.ok) {
+            console.error('HTTP error! status:', answer.status);
+            return [];
+        }
+        let data = await answer.json();
+        return data;
+    } catch (error) {
+        console.error('Error fetching movie details:', error);
+        return [];
+    }
+}

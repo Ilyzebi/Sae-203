@@ -3,8 +3,11 @@ let template = await templateFile.text();
 
 let Movie = {};
 
+
+Movie.movies = [];
+
 Movie.format = function (movies) {
-    // Gérer les cas où movies est null, undefined, ou pas un array
+
     if (!movies || !Array.isArray(movies)) {
         movies = Array.isArray(movies) ? movies : [];
     }
@@ -13,12 +16,15 @@ Movie.format = function (movies) {
         return `<div class="Movies"><p>aucun film disponible pour le moment</p></div>`;
     }
 
+    Movie.movies = movies;
+
     let html = "";
     movies.forEach(movie => {
         let movieTemplate = template;
         movieTemplate = movieTemplate.replaceAll('{{name}}', movie.name);
         movieTemplate = movieTemplate.replaceAll('{{image}}', movie.image);
         movieTemplate = movieTemplate.replaceAll('{{id}}', movie.id);
+        movieTemplate = movieTemplate.replace('<section class="Movies__Movie">', `<section class="Movies__Movie" onclick="C.handleMovieClick(${movie.id})">`);
         html += movieTemplate;
     });
     return `<div class="Movies">${html}</div>`;

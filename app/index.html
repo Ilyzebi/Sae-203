@@ -5,7 +5,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="./css/base.css" />
-    <link rel="stylesheet" href="./component/Movie/style.css" />
+
   </head>
 
   <body>
@@ -17,7 +17,9 @@
     <script type="module">
       import { NavBar } from "./component/NavBar/script.js";
       import { Movie } from "./component/Movie/script.js";
+      import { MovieDetails } from "./component/MovieDetails/script.js";
       import { DataMovie } from "./data/dataMovie.js";
+      import { MovieCategory } from "./component/MovieCategory/script.js";
 
       // Controleur
       // Rappel, écrire window.C plutôt que let C est nécessaire pour tester depuis la console du navigateur
@@ -30,16 +32,32 @@
         );
       };
 
-      C.start = function () {
-        V.renderNavBar("C.handlerAbout()");
+      C.handlerHome = function () {
+        C.loadMovies();
       };
 
-      // Vue (contient tout ce qui est relatif à l'affichage)
+      C.start = function () {
+        V.renderNavBar("C.handlerAbout()", "C.handlerHome()");
+      };
+
+
+
       window.V = {};
 
       C.loadMovies = async function(){
         let movies = await DataMovie.requestMovies();
         V.renderMovies(movies);
+      }
+
+      C.handleMovieClick = function(movieId) {
+        let movie = Movie.movies.find(m => m.id === movieId);
+        if (movie) {
+          V.renderMovieDetails(movie);
+        }
+      }
+
+      C.backToMovies = function() {
+        C.loadMovies();
       }
 
       /**
@@ -59,6 +77,22 @@
         content.innerHTML = Movie.format(movies);
       }
 
+      V.renderMovieDetails = function (movie){
+        let content = document.querySelector("#content");
+        content.innerHTML = MovieDetails.format(movie);
+      }
+
+      V.renderMovieCategory = function (categories){
+        let imageUrl = DataMovie.getHostUrl() + "server/images/";
+        
+        if (categories.length === 0) {
+          document.querySelector("#content").innerHTML = '<div class="no-movies">Aucun film disponible pour le moment</div>';
+        } else {
+          let categoriesHTML = MovieCategory.formatMany(categories, imageUrl);
+          document.querySelector("#content").innerHTML = categoriesHTML;
+        }
+      };
+      
       C.start(); // Démarre l'application
       C.loadMovies();
     </script>

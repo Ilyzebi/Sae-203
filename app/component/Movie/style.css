@@ -21,14 +21,13 @@
 
 .Movies__Movie img {
     width: 100%;
-    height: 350px;
+    height: 300px;
     object-fit: cover;
-    object-position: center;
     display: block;
 }
 
 
-.Movies__name {
+.Movies__Movie .Movies__name {
     margin: 15px;
     font-size: 1.2em;
     font-weight: bold;
