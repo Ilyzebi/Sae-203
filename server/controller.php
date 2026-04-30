@@ -53,8 +53,13 @@ function addMovieController(){
     }
 }
 
-function readCategoriesController(){
-    $movies = getMvoviesByCategory();
+function readMoviesByCategoryController(){
+    $movies = getMoviesByCategory();
     
     return $movies;
+}
+
+function readCategoriesController(){
+    $categories = getAllCategories();
+    return $categories;
 }

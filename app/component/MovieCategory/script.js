@@ -16,6 +16,8 @@ MovieCategory.format = function (categoryData, imageBaseUrl = './server/images/'
 };
 
 MovieCategory.formatMany = function(categories, imageBaseUrl = './server/images/'){
+    Movie.movies = categories.flatMap(cat => cat.movies);
+
     let html = '';
     for (const categoryData of categories) {
         html += MovieCategory.format(categoryData, imageBaseUrl);
