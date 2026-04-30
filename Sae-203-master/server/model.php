@@ -14,9 +14,9 @@
  * DBPWD : Mot de passe pour se connecter à la base de données.
  */
 define("HOST", "localhost");
-define("DBNAME", "leprevost2");
-define("DBLOGIN", "leprevost2");
-define("DBPWD", "leprevost2");
+define("DBNAME", "SAE203");
+define("DBLOGIN", "usersae203");
+define("DBPWD", "R0otP455wOrd!");
 
 
 function getAllMovies(){
@@ -90,6 +90,25 @@ function getMoviesByCategory(){
         $stmt = $cnx->prepare($sql);
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_OBJ);
+    } catch (PDOException $e) {
+        error_log("Database error: " . $e->getMessage());
+        return false;
+    }
+}
+
+function addProfile($name, $image, $min_age){
+    try {
+        $cnx = new PDO("mysql:host=".HOST.";dbname=".DBNAME, DBLOGIN, DBPWD);
+        $cnx->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        $sql = "INSERT INTO Profile (name, image, min_age) 
+                VALUES (:name, :image, :min_age)";
+        $stmt = $cnx->prepare($sql);
+        $stmt->bindParam(':name', $name);
+        $stmt->bindParam(':image', $image);
+        $stmt->bindParam(':min_age', $min_age);
+
+        $result = $stmt->execute();
+        return $result ? 1 : 0;
     } catch (PDOException $e) {
         error_log("Database error: " . $e->getMessage());
         return false;

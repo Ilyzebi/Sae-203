@@ -24,7 +24,7 @@ Movie.format = function (movies) {
         movieTemplate = movieTemplate.replaceAll('{{name}}', movie.name);
         movieTemplate = movieTemplate.replaceAll('{{image}}', movie.image);
         movieTemplate = movieTemplate.replaceAll('{{id}}', movie.id);
-        movieTemplate = movieTemplate.replace('<section class="Movies__Movie">', `<section class="Movies__Movie" onclick="C.handleMovieClick(${movie.id})">`);
+        
         html += movieTemplate;
     });
     return `<div class="Movies">${html}</div>`;

@@ -1,5 +1,8 @@
 <?php
 // Activer le rapport d'erreurs PHP
+header("Access-Control-Allow-Origin: https://leprevost-sae203.mmi-limoges.fr");
+header("Access-Control-Allow-Methods: GET, POST, OPTIONS");
+header("Access-Control-Allow-Headers: Content-Type");
 error_reporting(E_ALL);
 
 // Forcer l'affichage des erreurs à l'écran
@@ -72,6 +75,10 @@ if ( isset($_REQUEST['todo']) ){
 
     case 'readmoviesbycategory':
       $data = readMoviesByCategoryController();
+      break;
+
+    case 'addProfile':
+      $data = addProfileController();
       break;
 
 

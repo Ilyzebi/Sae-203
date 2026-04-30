@@ -50,8 +50,8 @@
       V.renderMovies(movies);
     }
 
-    C.handleMovieClick = function (movieId) {
-      let movie = Movie.movies.find(m => m.id === movieId);
+    C.handlerMovieClick = function (movieId) {
+      let movie = Movie.movies.find(m => m.id == movieId);
       if (movie) {
         V.renderMovieDetails(movie);
       }
@@ -98,6 +98,14 @@
       } else {
         let categoriesHTML = MovieCategory.formatMany(categories, imageUrl);
         document.querySelector("#content").innerHTML = categoriesHTML;
+
+        content.addEventListener("click", function (event) {
+          let movieElement = event.target.closest(".Movies__Movie");
+          if (movieElement) {
+            let movieId = movieElement.getAttribute("data-id");
+            C.handlerMovieClick(movieId);
+          }
+        });
       }
     };
 

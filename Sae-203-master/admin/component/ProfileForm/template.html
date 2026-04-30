@@ -1,0 +1,22 @@
+<div class="addProfile">
+    <h2 class="addProfile__title">Add Profile</h2>
+    <form class="addProfile__form">
+
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" placeholder="Profile title" required>
+
+        <label for="image">Avatar:</label>
+        <input type="text" id="image" name="image" placeholder="Image URL" required>
+
+        <label for="min_age">Minimum Age:</label>
+        <select id="min_age" name="min_age" required>
+            <option value="0">0</option>
+            <option value="6">6</option>
+            <option value="12">12</option>
+            <option value="16">16</option>
+            <option value="18">18</option>
+        </select>
+
+        <button type="button" onclick="{{handler}}">Submit</button>
+    </form>
+</div>

@@ -63,3 +63,24 @@ function readCategoriesController(){
     $categories = getAllCategories();
     return $categories;
 }
+
+function addProfileController(){
+    $required = ['name', 'image', 'min_age'];
+    foreach ($required as $field) {
+        if (!isset($_POST[$field])) {
+            return false;
+        }
+    }
+    
+    $name = $_POST['name'];
+    $image = $_POST['image'];
+    $min_age = $_POST['min_age'];
+    
+    $result = addProfile($name, $image, $min_age);
+    
+    if ($result!=0) {
+        return "Profile added successfully.";
+    } else {
+        return "Failed to add profile.";
+    }
+}
