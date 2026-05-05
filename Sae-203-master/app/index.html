@@ -21,6 +21,8 @@
     import { MovieDetails } from "./component/MovieDetails/script.js";
     import { DataMovie } from "./data/dataMovie.js";
     import { MovieCategory } from "./component/MovieCategory/script.js";
+    import { Profile } from "./component/Profile/script.js";
+    import { DataProfile } from "./data/dataProfile.js";
 
     // Controleur
     // Rappel, écrire window.C plutôt que let C est nécessaire pour tester depuis la console du navigateur
@@ -38,9 +40,19 @@
     };
 
     C.start = function () {
+      V.renderProfiles(profiles);
       V.renderNavBar("C.handlerAbout()", "C.handlerHome()");
     };
 
+    C.handlerProfileSelect = async function (id){
+      let profiles = await DataProfile.read();
+      let profile = profiles.find(p => p.id == id);
+      if(profile){
+        alert(`Profil sélectionné : ${profile.name}`);
+      } else {
+        alert("Profil non trouvé");
+      }
+    };
 
 
     window.V = {};

@@ -64,6 +64,11 @@ function readCategoriesController(){
     return $categories;
 }
 
+function readProfilesController(){
+    $profiles = getAllProfiles();
+    return $profiles;
+}
+
 function addProfileController(){
     $required = ['name', 'image', 'min_age'];
     foreach ($required as $field) {
