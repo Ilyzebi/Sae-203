@@ -45,15 +45,13 @@
     };
 
     C.handlerProfileSelect = async function (id){
-      let profiles = await DataProfile.read();
-      let profile = profiles.find(p => p.id == id);
+      let profile = await DataProfile.requestProfileById(id);
       if(profile){
         alert(`Profil sélectionné : ${profile.name}`);
       } else {
         alert("Profil non trouvé");
       }
-    };
-
+    }
 
     window.V = {};
 
@@ -100,6 +98,11 @@
     V.renderMovieDetails = function (movie) {
       let content = document.querySelector("#content");
       content.innerHTML = MovieDetails.format(movie);
+    }
+
+    V.renderProfiles = function (profiles) {
+      let content = document.querySelector("#content");
+      content.innerHTML = Profile.formatMany(profiles);
     }
 
     V.renderMovieCategory = function (categories) {

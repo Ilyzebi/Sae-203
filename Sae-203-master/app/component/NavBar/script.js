@@ -7,6 +7,7 @@ NavBar.format = function (hAbout, hHome) {
   let html = template;
   html = html.replace("{{hAbout}}", hAbout);
   html = html.replace("{{hHome}}", hHome);
+  html = html.replace("{{hProfiles}}", "C.handlerProfileSelect()");
   return html;
 };
 
