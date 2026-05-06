@@ -6,7 +6,7 @@ let Profile = {};
 Profile.format = function(profile, handler, imageBaseUrl = '../server/images/') {
     let html = template;
     html = html.replaceAll("{{name}}", profile.name);
-    html = html.replaceAll("{{image}}", profile.image || "images/default-avatar.png");
+   html = html.replaceAll("{{image}}", "../server/images/" + (profile.image || "default-avatar.png"));
     html = html.replaceAll("{{handler}}", handler + "(" + profile.id + ")");
     return html;
 }
