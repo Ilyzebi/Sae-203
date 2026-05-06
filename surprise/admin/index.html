@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <title>SAE2.03 ADMIN</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="./css/base.css" />
+ 
+</head>
+
+<body>
+  <section id="log"></section>
+
+  <section id="movieForm"></section>
+  <section id="profileForm"></section>
+  <script type="module">
+    import { Log } from "./component/Log/script.js";
+    import { MovieForm } from "./component/MovieForm/script.js";
+    import { ProfileForm } from "./component/ProfileForm/script.js";
+    import { DataMovie } from "./data/dataMovie.js";
+    import { DataProfile } from "./data/dataProfile.js";
+
+    window.C = {};
+
+    C.handlerUpdate = async function() {
+      let form = document.querySelector('.addMovie__form');
+      let fd = new FormData(form);
+      let res = await DataMovie.add(fd);
+      V.renderLog(res)
+    }
+
+    C.addProfile = async function() {
+      let form = document.querySelector('.addProfile__form');
+      let fd = new FormData(form);
+      let res = await DataProfile.add(fd);
+      V.renderLog(res)
+    }
+
+    C.start = function () {
+      V.renderLog("Démarrage de l'application");
+      V.renderMovieForm("C.handlerUpdate()");
+      V.renderProfileForm("C.addProfile()");
+    };
+
+    window.V = {};
+
+    V.renderLog = function (txt) {
+      let content = document.querySelector("#log");
+      content.innerHTML = Log.format(txt);
+    };
+
+    V.renderMovieForm = function (handler) {
+      let content = document.querySelector("#movieForm");
+      content.innerHTML = MovieForm.format(handler);
+    };
+
+    V.renderProfileForm = function (handler) {
+      let content = document.querySelector("#profileForm");
+      content.innerHTML = ProfileForm.format(handler);
+    };
+    
+    C.start();
+  </script>
+</body>
+
+</html>

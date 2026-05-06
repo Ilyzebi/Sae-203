@@ -1,0 +1,10 @@
+body {
+  background-color: var(--color-bg);
+  color: var(--color-fg);
+  font-family: var(--ff-sans);
+  margin: 0;
+}
+
+#content {
+  padding: 0 var(--space-lg);
+}

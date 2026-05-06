@@ -11,4 +11,16 @@ Profile.format = function(profile, handler) {
     return html;
 }
 
+Profile.formatMany = function(profiles) {
+    if (!profiles || profiles.length === 0) {
+        return '<p class="profiles__empty">Aucun profil disponible.</p>';
+    }
+    let html = '<div class="profiles">';
+    for (let profile of profiles) {
+        html += Profile.format(profile, "C.handlerProfileSelect");
+    }
+    html += '</div>';
+    return html;
+}
+
 export { Profile };

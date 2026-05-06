@@ -39,18 +39,26 @@
       C.loadMoviesByCategory();
     };
 
-    C.start = function () {
-      V.renderProfiles(profiles);
-      V.renderNavBar("C.handlerAbout()", "C.handlerHome()");
-    };
 
-    C.handlerProfileSelect = async function (id){
-      let profile = await DataProfile.requestProfileById(id);
-      if(profile){
-        alert(`Profil sélectionné : ${profile.name}`);
-      } else {
-        alert("Profil non trouvé");
+    C.handlerProfileSelect = async function (id) {
+      if (id === undefined) {
+        let profiles = await DataProfile.read();
+        V.renderProfiles(profiles);
+        return;
       }
+      let profiles = await DataProfile.read();
+      let profile = profiles.find(p => p.id == id);
+      if (profile) {
+        window.activeProfile = profile;
+        V.renderNavBar();
+        C.loadMoviesByCategory();
+      }
+    }
+
+    C.start = async function () {
+      V.renderNavBar();
+      let profiles = await DataProfile.read();
+      V.renderProfiles(profiles);
     }
 
     window.V = {};
@@ -87,7 +95,8 @@
      */
     V.renderNavBar = function (hAbout, hHome) {
       let header = document.querySelector("#header");
-      header.innerHTML = NavBar.format(hAbout, hHome);
+      let activeProfileName = window.activeProfile ? window.activeProfile.name : "Profil";
+      header.innerHTML = NavBar.format("C.handlerAbout()", "C.handlerHome()", "C.handlerProfileSelect()", activeProfileName);
     };
 
     V.renderMovies = function (movies) {

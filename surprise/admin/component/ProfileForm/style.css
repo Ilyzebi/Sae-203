@@ -1,0 +1,53 @@
+.addProfile {
+  padding: 2rem;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.addProfile__title {
+  margin-bottom: 2rem;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--color-bg);
+}
+
+.addProfile__form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.addProfile__form label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+  color: var(--color-bg);
+}
+
+.addProfile__form input,
+.addProfile__form select {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid var(--color-gray);
+  border-radius: 4px;
+  background-color: var(--color-bg);
+  color: var(--color-fg);
+  font-family: var(--ff-sans);
+  font-size: 1rem;
+  transition: border-color 0.2s ease;
+}
+
+.addProfile__form button {
+  padding: 0.75rem 1.5rem;
+  margin-top: 1rem;
+  background-color: var(--color-accent);
+  color: var(--color-bg);
+  border: none;
+  border-radius: 4px;
+  font-weight: 700;
+  font-family: var(--ff-sans);
+  font-size: 1rem;
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+}
+
