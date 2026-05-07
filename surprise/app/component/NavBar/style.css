@@ -1,11 +1,12 @@
 .navbar {
   display: flex;
+  align-items: left;
+  gap: 2rem;
   padding: 1rem 3rem;
   color: var(--color-fg);
   background-color: var(--color-bg);
 
   .navbar__item {
-    --_offset: 0.2rem;
     padding: 0.5rem 1rem; 
     cursor: pointer;
     &:hover {
@@ -13,7 +14,7 @@
       text-decoration: underline;
       text-decoration-color: orange;
       text-decoration-thickness: 0.1rem;
-      text-underline-offset: var(--_offset);
+      text-underline-offset: 0.2rem;
     }
   }
 }
@@ -28,5 +29,5 @@
   height: 36px;
   width: auto;
   margin-right: 1rem;
-  border-radius: 4px;
+  object-fit: contain;
 }

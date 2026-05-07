@@ -1,0 +1,15 @@
+<section class="hero" style="background-image: url('{{imageUrl}}')">
+  <div class="hero__overlay"></div>
+  <div class="hero__content">
+    <h1 class="hero__title">{{name}}</h1>
+    <div class="hero__tags">
+      <span class="hero__tag">{{category}}</span>
+      <span class="hero__tag">{{year}}</span>
+      <span class="hero__tag hero__tag--age">{{min_age}}+</span>
+    </div>
+    <p class="hero__desc">{{description}}</p>
+    <div class="hero__actions">
+      <button class="hero__btn hero__btn--play" onclick="C.handlerMovieClick('{{id}}')">Voir le film</button>
+    </div>
+  </div>
+</section>

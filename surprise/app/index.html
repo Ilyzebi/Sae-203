@@ -11,7 +11,7 @@
 
 <body>
   <header id="header"></header>
-
+  <section id="hero"></section>
   <section id="content">
   </section>
 
@@ -23,6 +23,7 @@
     import { MovieCategory } from "./component/MovieCategory/script.js";
     import { Profile } from "./component/Profile/script.js";
     import { DataProfile } from "./data/dataProfile.js";
+    import { Hero } from "./component/Hero/script.js";
 
     // Controleur
     // Rappel, écrire window.C plutôt que let C est nécessaire pour tester depuis la console du navigateur
@@ -78,6 +79,8 @@
     C.loadMoviesByCategory = async function () {
       let age = window.activeProfile ? window.activeProfile.min_age : 0;
       let categories = await DataMovie.requestMoviesByCategory(age);
+      let firstMovie = categories[0]?.movies[0];
+      if (firstMovie) V.renderHero(firstMovie);
       V.renderMovieCategory(categories);
     }
 
@@ -110,6 +113,11 @@
       content.innerHTML = MovieDetails.format(movie);
     }
 
+    V.renderHero = function (movie) {
+      let imageUrl = DataMovie.getHostUrl() + "/server/images/";
+      document.querySelector("#hero").innerHTML = Hero.format(movie, imageUrl);
+    };
+
     V.renderProfiles = function (profiles) {
       let imageUrl = DataMovie.getHostUrl() + "/server/images/";
       content.innerHTML = Profile.formatMany(profiles);
@@ -134,7 +142,7 @@
       }
     };
 
-    C.start(); 
+    C.start();
 
   </script>
 </body>
