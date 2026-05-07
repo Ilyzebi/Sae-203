@@ -10,8 +10,14 @@
   margin: 0 0 0.75rem 0.25rem;
 }
 
+.movie-category__row {
+  display: flex;
+  align-items: center;
+}
+
 .movie-category__list {
   display: flex;
+  flex: 1;
   gap: 0.75rem;
   padding-right: 40px;
   padding-left: 40px;
