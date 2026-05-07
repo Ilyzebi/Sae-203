@@ -7,12 +7,13 @@
   overflow: hidden;
   cursor: pointer;
   flex-shrink: 0;
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  z-index: 0;
 }
 
 .Movies__Movie:hover {
   transform: scale(1.05);
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.7);
+  z-index: 1;
 }
 
 .Movies__Movie img {
@@ -32,6 +33,59 @@
   font-weight: 600;
   color: #fff;
   background: linear-gradient(transparent, rgba(0, 0, 0, 0.85));
+}
+
+.Movies__hover {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: var(--color-surface);
+  border-radius: 0 0 10px 10px;
+  padding: 0.6rem;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.Movies__Movie:hover .Movies__hover {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.Movies__hover__title {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--color-fg-app);
+  margin: 0 0 0.3rem 0;
+}
+
+.Movies__hover__meta {
+  font-size: 0.75rem;
+  color: var(--color-fg-muted);
+  margin: 0 0 0.4rem 0;
+}
+
+.Movies__hover__desc {
+  font-size: 0.75rem;
+  color: var(--color-fg-muted);
+  line-height: 1.4;
+  margin: 0 0 0.5rem 0;
+}
+
+.Movies__hover__btn {
+  background: var(--color-accent);
+  color: #fff;
+  border: none;
+  padding: 0.3rem 0.8rem;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+}
+
+.Movies__hover__btn:hover {
+  opacity: 0.85;
 }
 
 @media (min-width: 1024px) {

@@ -1,4 +1,9 @@
-    <section class="Movies__Movie" data-id="{{id}}">
-        <img src="../server/images/{{image}}" alt="{{name}}">
-    </section>
-    
+<section class="Movies__Movie" data-id="{{id}}">
+    <img src="../server/images/{{image}}" alt="{{name}}">
+    <div class="Movies__hover">
+        <p class="Movies__hover__title">{{name}}</p>
+        <p class="Movies__hover__meta">{{year}} &bull; {{min_age}}+</p>
+        <p class="Movies__hover__desc">{{description}}</p>
+        <button class="Movies__hover__btn" onclick="event.stopPropagation(); C.handlerMovieClick('{{id}}')">▶ Voir</button>
+    </div>
+</section>

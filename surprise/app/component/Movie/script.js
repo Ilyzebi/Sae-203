@@ -24,6 +24,9 @@ Movie.format = function (movies) {
         movieTemplate = movieTemplate.replaceAll('{{name}}', movie.name);
         movieTemplate = movieTemplate.replaceAll('{{image}}', movie.image);
         movieTemplate = movieTemplate.replaceAll('{{id}}', movie.id);
+        movieTemplate = movieTemplate.replaceAll('{{year}}', movie.year ?? '');
+        movieTemplate = movieTemplate.replaceAll('{{min_age}}', movie.min_age ?? '');
+        movieTemplate = movieTemplate.replaceAll('{{description}}', movie.description ? movie.description.substring(0, 80) + '…' : '');
         
         html += movieTemplate;
     });
