@@ -1,8 +1,5 @@
 .navbar {
   display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
   padding: 1rem 3rem;
   color: var(--color-fg);
   background-color: var(--color-bg);
@@ -19,4 +16,10 @@
       text-underline-offset: var(--_offset);
     }
   }
+}
+
+.navbar__list {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
 }

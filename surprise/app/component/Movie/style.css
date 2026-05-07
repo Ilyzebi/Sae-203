@@ -1,12 +1,11 @@
 .Movies__Movie {
-  flex-shrink: 0;
-  width: 160px;
-  border-radius: 6px;
+  position: relative;
+  min-width: 320px;
+  height: 180px;
+  border-radius: 18px;
   overflow: hidden;
-  background: var(--color-surface);
   cursor: pointer;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-  border: 1px solid var(--color-border);
+  transition: 0.35s ease;
 }
 
 .Movies__Movie:hover {
