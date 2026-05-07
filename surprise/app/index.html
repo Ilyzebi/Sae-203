@@ -44,6 +44,7 @@
     C.handlerProfileSelect = async function (id) {
       if (id === undefined) {
         let profiles = await DataProfile.read();
+        document.querySelector("#hero").innerHTML = "";
         V.renderProfiles(profiles);
         return;
       }

@@ -2,7 +2,7 @@
   display: flex;
   align-items: center;
   gap: 2rem;
-  padding: 1rem 3rem;
+  padding: 0.75rem 1rem;
   color: var(--color-fg);
   background-color: var(--color-black);
 
@@ -30,4 +30,20 @@
   width: auto;
   margin-right: 1rem;
   object-fit: contain;
+}
+
+
+@media (min-width: 1024px) {
+  .navbar {
+    padding: 1rem 3rem;
+    gap: 2rem;
+  }
+
+  .navbar__list {
+    gap: 1rem;
+  }
+
+  .navbar__item {
+    padding: 0.5rem 1rem;
+  }
 }
