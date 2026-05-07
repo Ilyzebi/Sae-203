@@ -19,6 +19,7 @@ define("DBLOGIN", "leprevost2");
 define("DBPWD", "leprevost2");
 
 
+
 function getAllMovies($age = 0){
     try {
         // Connexion à la base de données

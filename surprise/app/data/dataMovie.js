@@ -39,10 +39,10 @@ DataMovie.requestMovieDetails = async function(){
     }
 }
 
-DataMovie.requestMoviesByCategory = async function(){   // ← nouvelle fonction
+DataMovie.requestMoviesByCategory = async function(age = 0){  
     try {
         let [moviesRes, categoriesRes] = await Promise.all([
-            fetch(HOST_URL + "/server/script.php?todo=readmovies"),
+            fetch(HOST_URL + "/server/script.php?todo=readmovies&age" + age),
             fetch(HOST_URL + "/server/script.php?todo=readcategories")
         ]);
         let movies = await moviesRes.json();
@@ -56,6 +56,6 @@ DataMovie.requestMoviesByCategory = async function(){   // ← nouvelle fonction
         console.error('Error fetching movies by category:', error);
         return [];
     }
-};
+}
 
 export {DataMovie};

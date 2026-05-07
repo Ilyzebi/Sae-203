@@ -34,11 +34,6 @@
   transition: border-color 0.2s ease;
 }
 
-.profile:hover .profile__avatar,
-.profile--active .profile__avatar {
-  border-color: var(--color-accent);
-}
-
 .profile__name {
   font-size: 0.95rem;
   color: var(--color-fg-app);

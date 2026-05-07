@@ -76,7 +76,8 @@
     }
 
     C.loadMoviesByCategory = async function () {
-      let categories = await DataMovie.requestMoviesByCategory();
+      let age = window.activeProfile ? window.activeProfile.min_age : 0;
+      let categories = await DataMovie.requestMoviesByCategory(age);
       V.renderMovieCategory(categories);
     }
 

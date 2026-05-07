@@ -6,7 +6,6 @@
   font-size: 1rem;
   font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.05em;
   color: var(--color-fg);
   margin: 0 0 0.75rem 0.25rem;
 }

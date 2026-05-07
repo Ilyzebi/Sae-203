@@ -19,15 +19,16 @@ define("DBLOGIN", "leprevost2");
 define("DBPWD", "leprevost2");
 
 
-function getAllMovies(){
+function getAllMovies($age = 0){
     try {
         // Connexion à la base de données
         $cnx = new PDO("mysql:host=".HOST.";dbname=".DBNAME, DBLOGIN, DBPWD);
         $cnx->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         // Requête SQL pour récupérer tous les films avec tous les détails
-        $sql = "select id, name, image, description, director, year, id_category, trailer, min_age from Movie";
+        $sql = "select id, name, image, description, director, year, id_category, trailer, min_age from Movie WHERE min_age <= :age";
         // Prépare la requête SQL
         $stmt = $cnx->prepare($sql);
+        $stmt->bindParam(':age', $age, PDO::PARAM_INT);
         // Exécute la requête SQL
         $stmt->execute();
         // Récupère les résultats de la requête sous forme d'objets

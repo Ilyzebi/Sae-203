@@ -23,3 +23,10 @@
   flex-direction: row;
   gap: 1rem;
 }
+
+.navbar__logo {
+  height: 36px;
+  width: auto;
+  margin-right: 1rem;
+  border-radius: 4px;
+}
