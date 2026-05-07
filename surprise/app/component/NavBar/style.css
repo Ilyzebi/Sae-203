@@ -1,10 +1,10 @@
 .navbar {
   display: flex;
-  align-items: left;
+  align-items: center;
   gap: 2rem;
   padding: 1rem 3rem;
   color: var(--color-fg);
-  background-color: var(--color-bg);
+  background-color: var(--color-black);
 
   .navbar__item {
     padding: 0.5rem 1rem; 

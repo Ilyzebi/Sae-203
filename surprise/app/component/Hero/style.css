@@ -7,7 +7,8 @@
   background-size: cover;
   background-position: center center;
   display: flex;
-  align-items: flex-end;
+  align-items: center;
+  overflow: hidden;
 }
 
 .hero__content {
@@ -38,7 +39,7 @@
 
 .hero__tag {
   font-size: 0.8rem;
-  color: var(--color-accent);
+  color: var(--color-fg);
   padding: 0.2rem 0.6rem;
   border: 1px solid var(--color-border);
   border-radius: 4px;
