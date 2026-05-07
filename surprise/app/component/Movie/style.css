@@ -4,7 +4,7 @@
   width: 200px;
   aspect-ratio: 2 / 3;
   border-radius: 10px;
-  overflow: visible;
+  overflow: hidden;
   cursor: pointer;
   flex-shrink: 0;
   z-index: 0;
@@ -36,22 +36,25 @@
   background: linear-gradient(transparent, rgba(0, 0, 0, 0.85));
 }
 
-.Movies__hover {
+.Movies__hover  {
   position: absolute;
-  top: 100%;
-  left: 0;
-  right: 0;
-  background: var(--color-surface);
-  border-radius: 0 0 10px 10px;
-  padding: 0.6rem;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(0,0,0,0.95) 0%,
+    rgba(0,0,0,0.5) 50%,
+    transparent 100%
+  );
+  padding: 0.75rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
   opacity: 0;
-  pointer-events: none;
   transition: opacity 0.3s ease;
 }
 
 .Movies__Movie:hover .Movies__hover {
   opacity: 1;
-  pointer-events: auto;
 }
 
 .Movies__hover__title {
