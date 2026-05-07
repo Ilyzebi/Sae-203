@@ -13,8 +13,7 @@
 .movie-category__list {
   display: flex;
   gap: 0.75rem;
-  overflow-x: visible;
-  overflow-y: visible;
+  overflow-x: auto;
   scrollbar-width: none;
 }
 
@@ -39,6 +38,8 @@
     scrollbar-width: none;
     padding-bottom: 0;
     padding-left: 3.5rem;
+    overflow-x: visible;
+    overflow-y: visible;
   }
 
   .movie-category__arrow {
