@@ -13,7 +13,7 @@ Movie.format = function (movies) {
     }
 
     if (movies.length === 0) {
-        return `<div class="Movies"><p>aucun film disponible pour le moment</p></div>`;
+        return `<p class="movies__empty">aucun film disponible pour le moment</p>`;
     }
 
     Movie.movies = movies;
@@ -27,7 +27,7 @@ Movie.format = function (movies) {
         
         html += movieTemplate;
     });
-    return `<div class="Movies">${html}</div>`;
+    return html;
 
 };
 
